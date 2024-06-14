@@ -11,6 +11,13 @@
         <option value="$PROJECT_DIR$/send-grid/pom.xml" />
         <option value="$PROJECT_DIR$/config-server/pom.xml" />
         <option value="$PROJECT_DIR$/authentication-service/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/discovery/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/config-server/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/users/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/gateway/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/amazon-s3/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/send-grid/pom.xml" />
+        <option value="$PROJECT_DIR$/backend/authentication-service/pom.xml" />
       </list>
     </option>
   </component>
