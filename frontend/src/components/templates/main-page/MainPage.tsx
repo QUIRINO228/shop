@@ -1,13 +1,12 @@
 "use client"
 import Header from "@/components/common/layout/header";
-import {Box, Link, Typography} from "@mui/material";
+import {Box, Typography} from "@mui/material";
 import Button from '@/components/common/ui/button/Button';
 import Image from "next/image";
 import theme from "@/styles/theme/theme";
 import { ButtonColor, ButtonVariant } from "@/components/common/ui/button/types";
 
 import * as styles from './MainPage.styles';
-import Card from '@/components/common/ui/card/Card'; // імпортуємо компонент карточки
 
 export default function MainPage() {
     return (
@@ -16,7 +15,7 @@ export default function MainPage() {
             <Box sx={styles.welcome}>
                 <Image
                     alt="main page"
-                    src="/images/home-page/home-page1.svg"
+                    src="https://bucketforshop.s3.eu-north-1.amazonaws.com/home-page1.svg"
                     layout="fill"
                     objectFit="cover"
                     style={{ zIndex: -1, marginTop: "50px" }}
