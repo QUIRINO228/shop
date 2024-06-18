@@ -28,6 +28,9 @@ public class GatewayConfig {
                 .route("authentication-service", r -> r.path("/auth/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://authentication-service"))
+                .route("products", r -> r.path("/products/**")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://products"))
                 .build();
     }
 
