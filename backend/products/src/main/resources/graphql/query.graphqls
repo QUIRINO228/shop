@@ -1,0 +1,12 @@
+type Product {
+    id: ID!,
+    description: String,
+    previewPhoto: String,
+    listOfPhotos: [String],
+    price: Float
+}
+
+type Query {
+    Products: [Product]!,
+    ProductById(id: ID): Product
+}

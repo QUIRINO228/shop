@@ -1,19 +1,22 @@
 package com.shop.product.services;
 
-import com.shop.product.client.AmazonS3Client;
+import com.shop.product.components.AmazonS3Client;
 import com.shop.product.dto.ProductDto;
 import com.shop.product.model.Product;
 import com.shop.product.repository.ProductRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class ProductServiceImpl implements ProductService {
 
     private final AmazonS3Client amazonS3Client;
@@ -27,7 +30,18 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = buildProductFromDto(photos, productDto);
         productRepository.save(product);
+        log.info("Product created: {}", product.getId());
         return true;
+    }
+
+    @Override
+    public Optional<List<Product>> Products() {
+        return Optional.of(productRepository.findAll());
+    }
+
+    @Override
+    public Optional<Product> ProductById(String id) {
+        return productRepository.findById(id);
     }
 
     private Product buildProductFromDto(List<MultipartFile> photos, ProductDto productDto) {
@@ -47,7 +61,9 @@ public class ProductServiceImpl implements ProductService {
         if (photo == null) {
             throw new IllegalArgumentException("Photo cannot be null.");
         }
-        return amazonS3Client.uploadPhoto(photo);
+        String photoUrl = amazonS3Client.uploadPhoto(photo);
+        log.info("Uploaded photo: {}", photoUrl);
+        return photoUrl;
     }
 
     private List<String> buildListOfPhotosUrls(List<MultipartFile> photos) {
