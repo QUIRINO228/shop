@@ -24,13 +24,10 @@ public class S3Config {
 
     @Bean
     public AmazonS3 s3Client() {
-        log.info("Creating Amazon S3 client...");
         final BasicAWSCredentials awsCredentials = new BasicAWSCredentials(awsId, awsKey);
-        AmazonS3 s3Client = AmazonS3ClientBuilder.standard()
+        return AmazonS3ClientBuilder.standard()
                 .withRegion(Regions.fromName(region))
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
                 .build();
-        log.info("Amazon S3 client created successfully.");
-        return s3Client;
     }
 }

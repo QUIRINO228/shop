@@ -20,7 +20,7 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final SendGridClient client;
+    private final SendGridClient sendGridClient;
 
     @Override
     public boolean createUser(UserDto userDTO) {
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService {
                 .body(user.getActivationLink())
                 .build();
 
-        client.sendActivatedLink(emailDto);
+        sendGridClient.sendActivatedLink(emailDto);
         log.info("Activation email sent to: {}", user.getEmail());
     }
 }

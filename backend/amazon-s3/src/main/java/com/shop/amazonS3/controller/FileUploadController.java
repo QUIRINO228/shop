@@ -23,17 +23,13 @@ public class FileUploadController {
     private String bucketName;
 
     @PostMapping("/upload")
-    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadPhoto(@RequestParam("file") MultipartFile file) {
         try {
-            log.info("Received request to upload file: {}", file.getOriginalFilename());
             String publicUrl = fileUploadService.uploadFile(file, bucketName);
-            log.info("File uploaded successfully. Public URL: {}", publicUrl);
             return ResponseEntity.ok(publicUrl);
         } catch (IllegalArgumentException e) {
-            log.error("Error occurred while uploading file: {}", e.getMessage());
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (Exception e) {
-            log.error("An error occurred while uploading the file.", e);
             return ResponseEntity.status(500).body("An error occurred while uploading the file.");
         }
     }
