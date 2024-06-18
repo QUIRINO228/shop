@@ -15,7 +15,8 @@ public class RouterValidator {
             "/auth/authenticate",
             "/users/authenticate",
             "/amazons3/upload",
-            "/products/create-product"
+            "/products/create-product",
+            "/products/graphql"
     );
 
     public Predicate<ServerHttpRequest> isSecured =

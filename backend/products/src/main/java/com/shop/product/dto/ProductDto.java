@@ -13,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 public class ProductDto {
+    private String id;
     private String title;
     private String description;
     private String previewPhoto;
