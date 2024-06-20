@@ -15,4 +15,6 @@ public interface ProductService {
     Optional<List<Product>> Products();
 
     Optional<Product> ProductById(String id);
+
+    Boolean deleteById(String id);
 }

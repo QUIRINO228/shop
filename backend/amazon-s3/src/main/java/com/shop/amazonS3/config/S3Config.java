@@ -5,6 +5,7 @@ import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.shop.amazonS3.service.S3Client;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -23,11 +24,16 @@ public class S3Config {
     private String awsKey;
 
     @Bean
-    public AmazonS3 s3Client() {
+    public AmazonS3 amazonS3() {
         final BasicAWSCredentials awsCredentials = new BasicAWSCredentials(awsId, awsKey);
         return AmazonS3ClientBuilder.standard()
                 .withRegion(Regions.fromName(region))
                 .withCredentials(new AWSStaticCredentialsProvider(awsCredentials))
                 .build();
+    }
+
+    @Bean
+    public S3Client s3Client(AmazonS3 amazonS3) {
+        return new S3Client(amazonS3);
     }
 }
