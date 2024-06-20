@@ -15,11 +15,15 @@ public class RouterValidator {
             "/auth/authenticate",
             "/users/authenticate",
             "/amazons3/upload",
+            "/amazons3/delete",
             "/products/create-product",
-            "/products/graphql"
+            "/products/graphql",
+            "/products/delete/**"
     );
 
     public Predicate<ServerHttpRequest> isSecured =
             request -> openEndpoint.stream()
-                    .noneMatch(uri ->request.getURI().getPath().contains(uri));
+                    .noneMatch(uri -> request.getURI().getPath().contains(uri));
+
 }
+

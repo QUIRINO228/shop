@@ -1,5 +1,6 @@
 type Product {
     id: ID!,
+    title: String,
     description: String,
     previewPhoto: String,
     listOfPhotos: [String],

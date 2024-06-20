@@ -28,23 +28,30 @@ public class AuthenticationFilter implements GatewayFilter {
         ServerHttpRequest request = exchange.getRequest();
         if (validator.isSecured.test(request)) {
             if (authMissing(request)) {
-                return onError(exchange, HttpStatus.UNAUTHORIZED);
+                return onError(exchange);
             }
             final String token = request.getHeaders().getOrEmpty("Authorization").get(0);
             if (jwtUtil.isExpired(token)) {
-                return onError(exchange, HttpStatus.UNAUTHORIZED);
+                return onError(exchange);
             }
+        }
+        if (isDeleteProductEndpoint(request)) {
+            return chain.filter(exchange);
         }
         return chain.filter(exchange);
     }
 
-    private Mono<Void> onError(ServerWebExchange exchange, HttpStatus httpStatus) {
+    private Mono<Void> onError(ServerWebExchange exchange) {
         ServerHttpResponse response = exchange.getResponse();
-        response.setStatusCode(httpStatus);
+        response.setStatusCode(HttpStatus.UNAUTHORIZED);
         return response.setComplete();
     }
 
     private boolean authMissing(ServerHttpRequest request) {
         return !request.getHeaders().containsKey("Authorization");
+    }
+
+    private boolean isDeleteProductEndpoint(ServerHttpRequest request) {
+        return request.getURI().getPath().startsWith("/products/delete/");
     }
 }

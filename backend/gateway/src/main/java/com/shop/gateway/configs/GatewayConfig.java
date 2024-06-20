@@ -32,7 +32,5 @@ public class GatewayConfig {
                         .filters(f -> f.filter(filter))
                         .uri("lb://products"))
                 .build();
-
     }
-
 }
